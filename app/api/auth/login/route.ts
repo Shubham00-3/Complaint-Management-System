@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     // Generate JWT token
     const token = signToken({
-      userId: user._id.toString(),
+      userId: (user._id as any).toString(),
       email: user.email,
       role: user.role,
     });
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     // Set httpOnly cookie
     response.cookies.set('auth_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false, // Set to false for localhost development
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',

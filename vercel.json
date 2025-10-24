@@ -1,0 +1,17 @@
+{
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "MONGODB_URI": "@mongodb-uri",
+    "JWT_SECRET": "@jwt-secret",
+    "SENDGRID_API_KEY": "@sendgrid-api-key",
+    "SENDGRID_FROM_EMAIL": "@sendgrid-from-email",
+    "ADMIN_EMAIL": "@admin-email",
+    "NEXT_PUBLIC_APP_URL": "@next-public-app-url"
+  }
+}
+
+

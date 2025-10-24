@@ -9,7 +9,7 @@ export async function POST() {
   // Clear auth cookie
   response.cookies.set('auth_token', '', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: false, // Set to false for localhost development
     sameSite: 'lax',
     maxAge: 0,
     path: '/',
