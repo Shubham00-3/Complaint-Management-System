@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/complaint-management
+      - JWT_SECRET=your-jwt-secret-here
+      - SENDGRID_API_KEY=your-sendgrid-api-key-here
+      - SENDGRID_FROM_EMAIL=your-email@example.com
+      - ADMIN_EMAIL=admin@example.com
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
