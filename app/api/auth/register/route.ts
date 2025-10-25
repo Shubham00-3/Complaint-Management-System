@@ -61,7 +61,19 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error('Registration error:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error code:', error.code);
     console.error('Error stack:', error.stack);
+    
+    // Handle MongoDB duplicate key error
+    if (error.code === 11000 || error.code === 11001) {
+      return NextResponse.json(
+        { error: 'User with this email already exists' },
+        { status: 409 }
+      );
+    }
+    
     return NextResponse.json(
       { error: 'Failed to register user', details: error.message },
       { status: 500 }
