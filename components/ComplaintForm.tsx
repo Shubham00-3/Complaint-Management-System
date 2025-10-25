@@ -60,7 +60,7 @@ export default function ComplaintForm({ onSuccess }: ComplaintFormProps) {
           required
           value={formData.title}
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
           placeholder="Enter complaint title"
         />
       </div>
@@ -75,7 +75,7 @@ export default function ComplaintForm({ onSuccess }: ComplaintFormProps) {
           rows={5}
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
           placeholder="Describe your complaint in detail"
         />
       </div>
@@ -89,7 +89,7 @@ export default function ComplaintForm({ onSuccess }: ComplaintFormProps) {
           required
           value={formData.category}
           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
         >
           <option value="Product">Product</option>
           <option value="Service">Service</option>
