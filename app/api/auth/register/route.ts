@@ -5,13 +5,17 @@ import User from '@/lib/models/User';
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('Registration attempt started');
     await connectDB();
+    console.log('Database connected');
 
     const body = await request.json();
+    console.log('Request body:', { email: body.email, name: body.name });
     const { email, password, name, role } = body;
 
     // Validate required fields
     if (!email || !password || !name) {
+      console.log('Validation failed: missing fields');
       return NextResponse.json(
         { error: 'Email, password, and name are required' },
         { status: 400 }
@@ -19,8 +23,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
+    console.log('Checking for existing user...');
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
+      console.log('User already exists:', email);
       return NextResponse.json(
         { error: 'User with this email already exists' },
         { status: 409 }
@@ -28,15 +34,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Hash password
+    console.log('Hashing password...');
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
+    console.log('Creating new user...');
     const user = await User.create({
       email: email.toLowerCase(),
       password: hashedPassword,
       name,
       role: role || 'user', // Default to 'user' if not specified
     });
+    console.log('User created successfully:', user.email);
 
     return NextResponse.json(
       {
@@ -52,6 +61,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error('Registration error:', error);
+    console.error('Error stack:', error.stack);
     return NextResponse.json(
       { error: 'Failed to register user', details: error.message },
       { status: 500 }
